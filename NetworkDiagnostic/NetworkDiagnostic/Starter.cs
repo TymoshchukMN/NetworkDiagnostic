@@ -1,5 +1,6 @@
 ﻿using System.Net.NetworkInformation;
 using System.Text;
+using System.Threading;
 
 namespace NetworkDiagnostic
 {
@@ -10,7 +11,7 @@ namespace NetworkDiagnostic
             List<string> hosts =
                 File.ReadAllLines("..\\..\\..\\Sorce\\addresses.txt").ToList();
 
-            Logger logger = new Logger(hosts);
+            Logger logger = new Logger();
 
             // Массив Byte, содержащие данные,
             // отправляемые с сообщением проверки связи ICMP
@@ -32,9 +33,14 @@ namespace NetworkDiagnostic
                         hosts[inxex],
                         timeout,
                         buffer).Status;
+
+                    Console.WriteLine($"{message}\t{hostNma}\t{status}");
+
                     message += $"\t{hostNma}\t{status}{(char)10}";
                     logger.WriteLog(hostNma, message);
-                    Console.WriteLine($"{hostNma}\t{status}");
+
+                    // делайем паузу в 2 секунды между отправкой ICMP
+                    Thread.Sleep(2000);
                 });
             }
         }

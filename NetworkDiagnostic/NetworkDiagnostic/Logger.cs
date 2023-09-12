@@ -3,18 +3,16 @@
     internal class Logger
     {
         private const string Path = "..\\..\\..\\Logs\\";
+        private const string LogFileName = "LingLog.log";
 
-        public Logger(List<string> hosts)
+        public Logger()
         {
-            for (int i = 0; i < hosts.Count; i++)
-            {
-                File.Create($"{Path}{hosts[i]}.txt").Close();
-            }
+            File.Create($"{LogFileName}").Close();
         }
 
         public void WriteLog(string host, string message)
         {
-            File.AppendAllText($"{Path}{host}.txt", message);
+            File.AppendAllText($"{Path}{LogFileName}", message);
         }
     }
 }

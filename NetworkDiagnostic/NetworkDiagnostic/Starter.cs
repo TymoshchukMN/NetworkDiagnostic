@@ -40,6 +40,7 @@ namespace NetworkDiagnostic
 
                     message += $"{DateTime.Now.ToLongTimeString()}\t{hostName}" +
                         $"\t{status}{(char)10}";
+                    ping.Dispose();
                 });
 
                 UI.PrintStatus(message);

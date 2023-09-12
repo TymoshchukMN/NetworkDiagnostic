@@ -21,8 +21,6 @@ namespace NetworkDiagnostic
             {
                 Directory.CreateDirectory($"{Path}{DirName}");
             }
-
-            //File.Create($"{LogFileName}").Close();
         }
 
         /// <summary>

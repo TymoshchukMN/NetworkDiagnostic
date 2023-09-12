@@ -13,7 +13,7 @@ namespace NetworkDiagnostic
         public static void Run()
         {
             List<string> hosts =
-                File.ReadAllLines("..\\..\\..\\Sorce\\addresses.txt").ToList();
+                File.ReadAllLines("..\\Sorce\\addresses.txt").ToList();
 
             Logger logger = new Logger();
 

@@ -7,7 +7,8 @@ namespace NetworkDiagnostic
 {
     internal class Logger
     {
-        private const string Path = "..\\..\\..\\Logs\\";
+        private const string Path = "..\\";
+        private const string DirName = "Logs";
         private const string LogFileName = "PingLog.log";
 
         /// <summary>
@@ -16,7 +17,12 @@ namespace NetworkDiagnostic
         /// </summary>
         public Logger()
         {
-            File.Create($"{LogFileName}").Close();
+            if (!Directory.Exists($"{Path}{DirName}"))
+            {
+                Directory.CreateDirectory($"{Path}{DirName}");
+            }
+
+            //File.Create($"{LogFileName}").Close();
         }
 
         /// <summary>
@@ -27,7 +33,7 @@ namespace NetworkDiagnostic
         /// </param>
         public void WriteLog(string message)
         {
-            File.AppendAllText($"{Path}{LogFileName}", message);
+            File.AppendAllText($"{Path}{DirName}\\{LogFileName}", message);
         }
     }
 }

@@ -1,6 +1,10 @@
-﻿using System.Net.NetworkInformation;
+﻿// Author: Tymoshchuk Maksym
+// Created On : 10.09.2023
+// Last Modified On :
+// Description: Starter class
+
+using System.Net.NetworkInformation;
 using System.Text;
-using System.Threading;
 
 namespace NetworkDiagnostic
 {
@@ -23,25 +27,26 @@ namespace NetworkDiagnostic
 
             for (; ;)
             {
+                string message = string.Empty;
                 Parallel.For(0, hosts.Count, inxex =>
                 {
                     Ping ping = new Ping();
-                    string hostNma = hosts[inxex];
+                    string hostName = hosts[inxex];
 
-                    string message = DateTime.Now.ToLongTimeString();
                     IPStatus status = ping.Send(
                         hosts[inxex],
                         timeout,
                         buffer).Status;
 
-                    Console.WriteLine($"{message}\t{hostNma}\t{status}");
-
-                    message += $"\t{hostNma}\t{status}{(char)10}";
-                    logger.WriteLog(hostNma, message);
-
-                    // делайем паузу в 2 секунды между отправкой ICMP
-                    Thread.Sleep(2000);
+                    message += $"{DateTime.Now.ToLongTimeString()}\t{hostName}" +
+                        $"\t{status}{(char)10}";
                 });
+
+                UI.PrintStatus(message);
+                logger.WriteLog(message);
+
+                // делайем паузу в 2 секунды между отправкой ICMP
+                Thread.Sleep(1500);
             }
         }
     }

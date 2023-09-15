@@ -13,7 +13,7 @@ namespace NetworkDiagnostic
         public static void Run()
         {
             List<string> hosts =
-                File.ReadAllLines("..\\..\\..\\source\\addresses.txt").ToList();
+                File.ReadAllLines("..\\source\\addresses.txt").ToList();
 
             Logger logger = new Logger();
 
@@ -47,7 +47,7 @@ namespace NetworkDiagnostic
                         buffer).Status;
 
                     message += $"{DateTime.Now.ToLongTimeString()}\t{hostName}" +
-                        $"\t{status}{(char)10}";
+                        $"\t{status}\n";
                     ping.Dispose();
                 });
 

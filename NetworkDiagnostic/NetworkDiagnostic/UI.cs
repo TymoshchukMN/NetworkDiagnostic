@@ -21,7 +21,7 @@ namespace NetworkDiagnostic
 
             string[] msgs = message.Split(splitChar);
 
-            for (ushort i = 0; i < msgs.Count(); ++i)
+            for (ushort i = 0; i < msgs.Length; ++i)
             {
                 if (!string.IsNullOrEmpty(msgs[i]))
                 {

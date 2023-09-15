@@ -13,7 +13,7 @@ namespace NetworkDiagnostic
         public static void Run()
         {
             List<string> hosts =
-                File.ReadAllLines("..\\Sorce\\addresses.txt").ToList();
+                File.ReadAllLines("..\\..\\..\\source\\addresses.txt").ToList();
 
             Logger logger = new Logger();
 
@@ -25,8 +25,16 @@ namespace NetworkDiagnostic
             byte[] buffer = Encoding.ASCII.GetBytes(data);
             int timeout = 4000;
 
-            for (; ;)
+            // значение по умолчанию
+            ConsoleKey usreInput = ConsoleKey.D0;
+
+            do
             {
+                if (Console.KeyAvailable)
+                {
+                    usreInput = Console.ReadKey().Key;
+                }
+
                 string message = string.Empty;
                 Parallel.For(0, hosts.Count, inxex =>
                 {
@@ -46,9 +54,16 @@ namespace NetworkDiagnostic
                 UI.PrintStatus(message);
                 logger.WriteLog(message);
 
-                // делайем паузу в 2 секунды между отправкой ICMP
-                Thread.Sleep(1500);
+                // доп проверка, чтобы не ждать 2 секунды, до завершения программы
+                if (usreInput == ConsoleKey.Q)
+                {
+                    break;
+                }
+
+                // делайем паузу в 1 секунды между отправкой ICMP
+                Thread.Sleep(2000);
             }
+            while (usreInput != ConsoleKey.Q);
         }
     }
 }

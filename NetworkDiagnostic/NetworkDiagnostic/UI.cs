@@ -1,47 +1,34 @@
 ﻿// Author: Tymoshchuk Maksym
 // Created On : 10.09.2023
-// Last Modified On :
+// Last Modified On : 18.09.2023
 // Description: Users interface
+
+using System.Net.NetworkInformation;
+using NetworkDiagnostic_v2._0;
 
 namespace NetworkDiagnostic
 {
     internal class UI
     {
-        /// <summary>
-        /// Print ping status in console.
-        /// </summary>
-        /// <param name="message">
-        /// message for printing.
-        /// </param>
-        public static void PrintStatus(string message)
+        public static void PrintStatus(List<StatusHost> hostList)
         {
-            // символ новой строки
-            char splitChar = (char)10;
-            char tabChar = (char)9;
-
-            string[] msgs = message.Split(splitChar);
-
-            for (ushort i = 0; i < msgs.Length; ++i)
+            for (int i = 0; i < hostList.Count; i++)
             {
-                if (!string.IsNullOrEmpty(msgs[i]))
+                Console.Write($"{hostList[i].Time}\t");
+                Console.Write($"{hostList[i].HostName}\t");
+
+                switch (hostList[i].Status)
                 {
-                    string[] parts = msgs[i].Split(tabChar);
-
-                    for (ushort k = 0; k < parts.Count() - 1; ++k)
-                    {
-                        Console.Write($"{parts[k]}\t");
-                    }
-
-                    string status = parts[parts.Count() - 1];
-
-                    if (status == "Success")
-                    {
-                        PrintChangedColor(ConsoleColor.Green, status);
-                    }
-                    else
-                    {
-                        PrintChangedColor(ConsoleColor.Red, status);
-                    }
+                    case IPStatus.Success:
+                        PrintChangedColor(
+                            ConsoleColor.Green,
+                            hostList[0].Status.ToString());
+                        break;
+                    default:
+                        PrintChangedColor(
+                            ConsoleColor.Red,
+                            hostList[0].Status.ToString());
+                        break;
                 }
             }
         }

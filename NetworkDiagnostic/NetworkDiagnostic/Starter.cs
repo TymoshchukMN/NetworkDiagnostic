@@ -1,10 +1,11 @@
 ﻿// Author: Tymoshchuk Maksym
 // Created On : 10.09.2023
-// Last Modified On :
+// Last Modified On : 18.09.2023
 // Description: Starter class
 
 using System.Net.NetworkInformation;
 using System.Text;
+using NetworkDiagnostic_v2._0;
 
 namespace NetworkDiagnostic
 {
@@ -13,7 +14,18 @@ namespace NetworkDiagnostic
         public static void Run()
         {
             List<string> hosts =
-                File.ReadAllLines("..\\..\\..\\source\\addresses.txt").ToList();
+                File.ReadAllLines("..\\source\\addresses.txt").ToList();
+
+            List<StatusHost> hostList = new List<StatusHost>();
+
+            foreach (string line in hosts)
+            {
+                hostList.Add(
+                    new StatusHost(
+                        line,
+                        IPStatus.Unknown,
+                        DateTime.Now));
+            }
 
             Logger logger = new Logger();
 
@@ -28,6 +40,13 @@ namespace NetworkDiagnostic
             // значение по умолчанию
             ConsoleKey usreInput = ConsoleKey.D0;
 
+            NetRoute route = new NetRoute();
+
+            // первое определение маршрутов.
+            route.GetRoutes("firstRouteprint");
+
+            ushort countWrongSendings = 0;
+            const ushort Wrong_counts = 5;
             do
             {
                 if (Console.KeyAvailable)
@@ -46,12 +65,31 @@ namespace NetworkDiagnostic
                         timeout,
                         buffer).Status;
 
+                    hostList.Where(
+                        (x) => x.HostName == hostName).ToList().ForEach(
+                            (s) =>
+                            {
+                                s.Status = status;
+                                s.Time = DateTime.Now.ToLongTimeString();
+                            });
+
                     message += $"{DateTime.Now.ToLongTimeString()}\t{hostName}" +
-                        $"\t{status}{(char)10}";
+                        $"\t{status}\n";
+
                     ping.Dispose();
                 });
 
-                UI.PrintStatus(message);
+                if (hostList.Where((x) => x.HostName.StartsWith("10.")).All((s) => s.Status != IPStatus.Success))
+                {
+                    ++countWrongSendings;
+                }
+
+                if (countWrongSendings >= Wrong_counts)
+                {
+                    route.GetRoutes("RouteprintPingError");
+                }
+
+                UI.PrintStatus(hostList);
                 logger.WriteLog(message);
 
                 // доп проверка, чтобы не ждать 2 секунды, до завершения программы

@@ -21,10 +21,5 @@ namespace NetworkDiagnostic
             proc1.WindowStyle = ProcessWindowStyle.Hidden;
             Process.Start(proc1);
         }
-
-        ~NetRoute()
-        {
-            GetRoutes("FinishProgramm");
-        }
     }
 }

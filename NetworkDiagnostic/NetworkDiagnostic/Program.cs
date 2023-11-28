@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace NetworkDiagnostic
+﻿namespace NetworkDiagnostic
 {
     internal class Program
     {

@@ -3,8 +3,6 @@
 // Last Modified On :
 // Description: Logger. Creation log file and writong actions
 
-using System.IO;
-
 namespace NetworkDiagnostic
 {
     internal class Logger

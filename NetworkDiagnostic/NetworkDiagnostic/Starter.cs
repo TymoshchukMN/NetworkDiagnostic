@@ -5,7 +5,6 @@
 
 using System.Net.NetworkInformation;
 using System.Text;
-using NetworkDiagnostic_v2._0;
 
 namespace NetworkDiagnostic
 {
@@ -40,18 +39,17 @@ namespace NetworkDiagnostic
             // значение по умолчанию
             ConsoleKey usreInput = ConsoleKey.D0;
 
-            NetRoute route = new NetRoute();
-
-            // первое определение маршрутов.
-            route.GetRoutes("firstRouteprint");
-
-            ushort countWrongSendings = 0;
-            const ushort Wrong_counts = 5;
             do
             {
                 if (Console.KeyAvailable)
                 {
                     usreInput = Console.ReadKey().Key;
+                }
+
+                // доп проверка, чтобы не ждать 2 секунды, до завершения программы
+                if (usreInput == ConsoleKey.Q)
+                {
+                    break;
                 }
 
                 string message = string.Empty;
@@ -78,16 +76,6 @@ namespace NetworkDiagnostic
 
                     ping.Dispose();
                 });
-
-                if (hostList.Where((x) => x.HostName.StartsWith("10.")).All((s) => s.Status != IPStatus.Success))
-                {
-                    ++countWrongSendings;
-                }
-
-                if (countWrongSendings >= Wrong_counts)
-                {
-                    route.GetRoutes("RouteprintPingError");
-                }
 
                 UI.PrintStatus(hostList);
                 logger.WriteLog(message);

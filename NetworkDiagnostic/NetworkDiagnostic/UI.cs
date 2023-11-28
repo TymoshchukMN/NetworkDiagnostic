@@ -4,7 +4,6 @@
 // Description: Users interface
 
 using System.Net.NetworkInformation;
-using NetworkDiagnostic_v2._0;
 
 namespace NetworkDiagnostic
 {

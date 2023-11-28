@@ -1,7 +1,9 @@
 ﻿// Author: Tymoshchuk Maksym
 // Created On : 10.09.2023
-// Last Modified On :
+// Last Modified On : 28.11.2023
 // Description: Logger. Creation log file and writong actions
+
+using System.IO;
 
 namespace NetworkDiagnostic
 {

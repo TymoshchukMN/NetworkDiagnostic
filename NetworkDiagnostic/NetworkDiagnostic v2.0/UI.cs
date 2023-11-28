@@ -3,6 +3,8 @@
 // Last Modified On : 18.09.2023
 // Description: Users interface
 
+using System;
+using System.Collections.Generic;
 using System.Net.NetworkInformation;
 
 namespace NetworkDiagnostic
@@ -21,22 +23,30 @@ namespace NetworkDiagnostic
                     case IPStatus.Success:
                         PrintChangedColor(
                             ConsoleColor.Green,
-                            hostList[0].Status.ToString());
+                            hostList[i].Status.ToString());
                         break;
                     default:
                         PrintChangedColor(
                             ConsoleColor.Red,
-                            hostList[0].Status.ToString());
+                            hostList[i].Status.ToString());
                         break;
                 }
             }
         }
-
         public static void PrintErrorFileExist()
         {
-            Console.WriteLine("File 'addresses.txt' doesn't exist");
+            Console.WriteLine();
+            PrintChangedColor(ConsoleColor.DarkCyan, new string('*', 70));
+            Console.WriteLine();
+            Console.WriteLine("File 'addresses.txt' doesn't exist. " +
+                "Create one and try one more time");
+            Console.WriteLine();
+            PrintChangedColor(ConsoleColor.DarkCyan, new string('*', 70));
+            Console.WriteLine();
+
             Console.WriteLine("Press any key for exit....");
         }
+
 
         /// <summary>
         /// Change item color.

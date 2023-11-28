@@ -3,14 +3,20 @@
 // Last Modified On : 28.11.2023
 // Description: Starter class
 
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace NetworkDiagnostic
 {
     internal class Starter
     {
-        private const string FileAddress = "..\\source\\addresses.txt";
+        private const string FileAddress = "..\\addresses.txt";
 
         /// <summary>
         /// RUn programm.

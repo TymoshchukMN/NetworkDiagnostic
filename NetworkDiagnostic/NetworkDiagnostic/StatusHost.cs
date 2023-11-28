@@ -11,7 +11,7 @@ namespace NetworkDiagnostic
         {
             HostName = hostName;
             Status = status;
-            Time = DateTime.Now.ToLongTimeString();
+            Time = time.ToLongTimeString();
         }
 
         public string HostName { get; set; }

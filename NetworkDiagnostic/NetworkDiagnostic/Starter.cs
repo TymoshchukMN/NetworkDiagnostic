@@ -1,6 +1,6 @@
 ﻿// Author: Tymoshchuk Maksym
 // Created On : 10.09.2023
-// Last Modified On : 18.09.2023
+// Last Modified On : 28.11.2023
 // Description: Starter class
 
 using System.Net.NetworkInformation;
@@ -10,10 +10,49 @@ namespace NetworkDiagnostic
 {
     internal class Starter
     {
+        private const string FileAddress = "..\\source\\addresses.txt";
+
+        /// <summary>
+        /// RUn programm.
+        /// </summary>
         public static void Run()
         {
+            if (CheckIfFileExsit())
+            {
+                Process();
+            }
+            else
+            {
+                UI.PrintErrorFileExist();
+                Console.ReadKey();
+            }
+        }
+
+        /// <summary>
+        /// Check if files with addresses exist.
+        /// </summary>
+        /// <returns>
+        /// true if file exist.
+        /// </returns>
+        private static bool CheckIfFileExsit()
+        {
+            bool isFileExist = false;
+
+            if (File.Exists(FileAddress))
+            {
+                isFileExist = true;
+            }
+
+            return isFileExist;
+        }
+
+        /// <summary>
+        /// General process.
+        /// </summary>
+        private static void Process()
+        {
             List<string> hosts =
-                File.ReadAllLines("..\\source\\addresses.txt").ToList();
+                File.ReadAllLines(FileAddress).ToList();
 
             List<StatusHost> hostList = new List<StatusHost>();
 

@@ -32,6 +32,12 @@ namespace NetworkDiagnostic
             }
         }
 
+        public static void PrintErrorFileExist()
+        {
+            Console.WriteLine("File 'addresses.txt' doesn't exist");
+            Console.WriteLine("Press any key for exit....");
+        }
+
         /// <summary>
         /// Change item color.
         /// </summary>

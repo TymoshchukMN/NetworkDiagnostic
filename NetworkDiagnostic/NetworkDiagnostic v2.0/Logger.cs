@@ -29,9 +29,9 @@ namespace NetworkDiagnostic
 
             for (ushort i = 0; i < (ushort)hosts.Count; ++i)
             {
-                if (File.Exists($"{hosts[i].HostName}.txt"))
+                if (File.Exists($"{FullPath}\\{hosts[i].HostName}.txt"))
                 {
-                    File.Delete($"{hosts[i].HostName}.txt");
+                    File.Delete($"{FullPath}\\{hosts[i].HostName}.txt");
                 }
             }
         }

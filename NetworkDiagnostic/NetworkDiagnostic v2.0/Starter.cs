@@ -119,7 +119,7 @@ namespace NetworkDiagnostic
                             });
 
                     message += $"{DateTime.Now.ToLongTimeString()}\t{hostName}" +
-                        $"\t{reply.Status}\t{reply.RoundtripTime}\n";
+                        $"\t{reply.RoundtripTime}\t{reply.Status}\n";
 
                     ping.Dispose();
                 });

@@ -71,7 +71,8 @@ namespace NetworkDiagnostic
                         DateTime.Now));
             }
 
-            Logger logger = new Logger();
+            //Logger logger = new Logger();
+            Logger logger = new Logger(hostList);
 
             // Массив Byte, содержащие данные,
             // отправляемые с сообщением проверки связи ICMP
@@ -125,6 +126,8 @@ namespace NetworkDiagnostic
 
                 UI.PrintStatus(hostList);
                 logger.WriteLog(message);
+
+                logger.WriteLogHosts(hostList);
 
                 // доп проверка, чтобы не ждать 2 секунды, до завершения программы
                 if (usreInput == ConsoleKey.Q)

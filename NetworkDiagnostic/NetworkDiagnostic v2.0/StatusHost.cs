@@ -15,6 +15,7 @@ namespace NetworkDiagnostic
             Status = status;
             TimeOfOccurrence = time.ToLongTimeString();
         }
+
         /// <summary>
         /// Get or Set host`s name.
         /// </summary>

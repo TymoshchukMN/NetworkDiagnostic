@@ -13,13 +13,26 @@ namespace NetworkDiagnostic
         {
             HostName = hostName;
             Status = status;
-            Time = time.ToLongTimeString();
+            TimeOfOccurrence = time.ToLongTimeString();
         }
-
+        /// <summary>
+        /// Get or Set host`s name.
+        /// </summary>
         public string HostName { get; set; }
 
+        /// <summary>
+        /// Get or Set ping status.
+        /// </summary>
         public IPStatus Status { get; set; }
 
-        public string Time { get; set; }
+        /// <summary>
+        /// Get or Set Time Of Occurrence.
+        /// </summary>
+        public string TimeOfOccurrence { get; set; }
+
+        /// <summary>
+        /// Get or Set RoundtripTime.
+        /// </summary>
+        public long RoundtripTime { get; set; }
     }
 }

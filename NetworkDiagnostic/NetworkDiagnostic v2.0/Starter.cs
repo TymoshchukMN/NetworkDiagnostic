@@ -103,21 +103,22 @@ namespace NetworkDiagnostic
                     Ping ping = new Ping();
                     string hostName = hosts[inxex];
 
-                    IPStatus status = ping.Send(
+                    PingReply reply = ping.Send(
                         hosts[inxex],
                         timeout,
-                        buffer).Status;
+                        buffer);
 
                     hostList.Where(
                         (x) => x.HostName == hostName).ToList().ForEach(
                             (s) =>
                             {
-                                s.Status = status;
-                                s.Time = DateTime.Now.ToLongTimeString();
+                                s.Status = reply.Status;
+                                s.TimeOfOccurrence = DateTime.Now.ToLongTimeString();
+                                s.RoundtripTime = reply.RoundtripTime;
                             });
 
                     message += $"{DateTime.Now.ToLongTimeString()}\t{hostName}" +
-                        $"\t{status}\n";
+                        $"\t{reply.Status}\t{reply.RoundtripTime}\n";
 
                     ping.Dispose();
                 });

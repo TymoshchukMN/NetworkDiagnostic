@@ -15,8 +15,9 @@ namespace NetworkDiagnostic
         {
             for (int i = 0; i < hostList.Count; i++)
             {
-                Console.Write($"{hostList[i].Time}\t");
+                Console.Write($"{hostList[i].TimeOfOccurrence}\t");
                 Console.Write($"{hostList[i].HostName}\t");
+                Console.Write($"{hostList[i].RoundtripTime}\t");
 
                 switch (hostList[i].Status)
                 {

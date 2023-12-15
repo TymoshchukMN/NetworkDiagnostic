@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net.NetworkInformation;
 
-
 namespace NetworkDiagnostic
 {
     internal class StatusHost
@@ -17,22 +16,22 @@ namespace NetworkDiagnostic
         }
 
         /// <summary>
-        /// Get or Set host`s name.
+        /// Gets or Sets host`s name.
         /// </summary>
         public string HostName { get; set; }
 
         /// <summary>
-        /// Get or Set ping status.
+        /// Gets or Sets ping status.
         /// </summary>
         public IPStatus Status { get; set; }
 
         /// <summary>
-        /// Get or Set Time Of Occurrence.
+        /// Gets or Sets Time Of Occurrence.
         /// </summary>
         public string TimeOfOccurrence { get; set; }
 
         /// <summary>
-        /// Get or Set RoundtripTime.
+        /// Gets or Sets RoundtripTime.
         /// </summary>
         public long RoundtripTime { get; set; }
     }

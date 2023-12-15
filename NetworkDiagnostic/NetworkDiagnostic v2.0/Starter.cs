@@ -71,7 +71,6 @@ namespace NetworkDiagnostic
                         DateTime.Now));
             }
 
-            //Logger logger = new Logger();
             Logger logger = new Logger(hostList);
 
             // Массив Byte, содержащие данные,

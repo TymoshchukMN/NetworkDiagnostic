@@ -11,6 +11,12 @@ namespace NetworkDiagnostic
 {
     internal class UI
     {
+        /// <summary>
+        /// Print ping status into console.
+        /// </summary>
+        /// <param name="hostList">
+        /// List with gping data.
+        /// </param>
         public static void PrintStatus(List<StatusHost> hostList)
         {
             for (int i = 0; i < hostList.Count; i++)
@@ -34,6 +40,10 @@ namespace NetworkDiagnostic
                 }
             }
         }
+
+        /// <summary>
+        /// Print error if file doesn`t exist.
+        /// </summary>
         public static void PrintErrorFileExist()
         {
             Console.WriteLine();
@@ -47,7 +57,6 @@ namespace NetworkDiagnostic
 
             Console.WriteLine("Press any key for exit....");
         }
-
 
         /// <summary>
         /// Change item color.

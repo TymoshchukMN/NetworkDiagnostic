@@ -14,24 +14,27 @@ namespace NetworkDiagnostic
         private const string Path = "..\\";
         private const string DirName = "Logs";
         private const string CommonLogFileName = "PingLog.log";
-        private readonly string FullPath = $"{Path}{DirName}";
+        private readonly string fullPath = $"{Path}{DirName}";
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Logger"/> class.
         /// Ctor with creating log files fo each host.
         /// </summary>
-        /// <param name="hosts"></param>
+        /// <param name="hosts">
+        /// hosts.
+        /// </param>
         public Logger(List<StatusHost> hosts)
         {
-            if (!Directory.Exists(FullPath))
+            if (!Directory.Exists(fullPath))
             {
-                Directory.CreateDirectory(FullPath);
+                Directory.CreateDirectory(fullPath);
             }
 
             for (ushort i = 0; i < (ushort)hosts.Count; ++i)
             {
-                if (File.Exists($"{FullPath}\\{hosts[i].HostName}.txt"))
+                if (File.Exists($"{fullPath}\\{hosts[i].HostName}.txt"))
                 {
-                    File.Delete($"{FullPath}\\{hosts[i].HostName}.txt");
+                    File.Delete($"{fullPath}\\{hosts[i].HostName}.txt");
                 }
             }
         }
@@ -44,7 +47,7 @@ namespace NetworkDiagnostic
         /// </param>
         public void WriteLog(string message)
         {
-            File.AppendAllText($"{FullPath}\\{CommonLogFileName}", message);
+            File.AppendAllText($"{fullPath}\\{CommonLogFileName}", message);
         }
 
         /// <summary>
@@ -55,13 +58,13 @@ namespace NetworkDiagnostic
         /// </param>
         public void WriteLogHosts(List<StatusHost> hosts)
         {
-            for (ushort i = 0; i < (ushort)hosts.Count; ++i) 
+            for (ushort i = 0; i < (ushort)hosts.Count; ++i)
             {
-                string log = hosts[i].TimeOfOccurrence + ';' 
+                string log = hosts[i].TimeOfOccurrence + ';'
                     + hosts[i].RoundtripTime + (char)10;
 
-                File.AppendAllText($"{FullPath}\\{hosts[i].HostName}.txt", log);
-            }            
+                File.AppendAllText($"{fullPath}\\{hosts[i].HostName}.txt", log);
+            }
         }
     }
 }
